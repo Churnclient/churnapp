@@ -7,19 +7,18 @@ import requests
 
 
 # Define the URL of the raw model file on GitHub
-model_url = 'https://github.com/Churnclient/churnapp/blob/main/model.pkl'
+model_url = 'https://github.com/Churnclient/churnapp/raw/main/model.pkl'
 
 # Define a function to download the model file from GitHub
-#@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
-    with open('model.plk', 'wb') as file:
+    with open('model.pkl', 'wb') as file:
         file.write(response.content)
-    return load('model.plk')
+    return load('model.pkl')
 
 # Download the model file from GitHub
-download_model(model_url)
-
+model = download_model(model_url)
 
 # Define the features
 features = ["CreditScore", "Geography_France", "Geography_Spain", "Geography_Germany", "Gender_Male", "Gender_Female", "Age", "Tenure", "Balance", "NumOfProducts", "HasCrCard", "IsActiveMember", "EstimatedSalary"]
