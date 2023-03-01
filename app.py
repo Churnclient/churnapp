@@ -15,9 +15,10 @@ def download_model(url):
     response = requests.get(url)
     with open('model.plk', 'wb') as file:
         file.write(response.content)
+    return load('model.plk')
 
 # Download the model file from GitHub
-model = download_model(model_url)
+download_model(model_url)
 
 
 # Define the features
