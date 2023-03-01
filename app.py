@@ -5,7 +5,7 @@ import streamlit as st
 from sklearn.preprocessing import StandardScaler
 
 # Load the model
-with open('model.plk', 'rb') as file:
+with open('./model.plk', 'rb') as file:
     model = load(file)
 
 
