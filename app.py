@@ -74,7 +74,7 @@ input_data = np.append(input_data, [estimated_salary])
 input_data = scaler.fit_transform(input_data.reshape(1, -1))
 
 # Make a prediction
-prediction = model.predict(input_data)
+prediction = model1.predict(input_data)
 
 # Display the prediction
 st.write("## Prediction")
