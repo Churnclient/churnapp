@@ -79,10 +79,12 @@ prediction = model11.predict(input_data)
 # Display the prediction
 st.write("## Prediction")
 if prediction == 0:
-    st.write("The client is predicted to stay.")
+    #st.write("The client is predicted to stay.")
+    st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
     st.balloons()
 else:
-    st.write("The client is predicted to churn.")
+    #st.write("The client is predicted to churn.")
+    st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
     st.snow()
 st.stop()
 
