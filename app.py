@@ -1,12 +1,13 @@
-import pickle
+from joblib import load
 import numpy as np
 import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
 
 # Load the model
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+with open('model.plk', 'rb') as file:
+    model = load(file)
+
 
 # Define the features
 features = ["CreditScore", "Geography_France", "Geography_Spain", "Geography_Germany", "Gender_Male", "Gender_Female", "Age", "Tenure", "Balance", "NumOfProducts", "HasCrCard", "IsActiveMember", "EstimatedSalary"]
