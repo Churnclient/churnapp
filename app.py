@@ -46,9 +46,9 @@ input_data = np.array([[credit_score]])
 if geography == "France":
     input_data = np.append(input_data, [1, 0, 0])
 elif geography == "Spain":
-    input_data = np.append(input_data, [0, 1, 0])
-else:
     input_data = np.append(input_data, [0, 0, 1])
+else:
+    input_data = np.append(input_data, [0, 1, 0])
 
 if gender == "Male":
     input_data = np.append(input_data, [1, 0])
@@ -68,6 +68,7 @@ else:
     input_data = np.append(input_data, [0])
 
 input_data = np.append(input_data, [estimated_salary])
+
 
 # Scale the input data
 input_data = scaler.fit_transform(input_data.reshape(1, -1))
