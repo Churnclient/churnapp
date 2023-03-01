@@ -17,7 +17,7 @@ def download_model(url):
         file.write(response.content)
 
 # Download the model file from GitHub
-download_model(model_url)
+model = download_model(model_url)
 
 
 # Define the features
