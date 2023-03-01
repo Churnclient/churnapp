@@ -18,7 +18,7 @@ def download_model(url):
     return load('model1.pkl')
 
 # Download the model file from GitHub
-download_model(model_url)
+model1 = download_model(model_url)
 
 # Define the features
 features = ["CreditScore", "Geography_France", "Geography_Spain", "Geography_Germany", "Gender_Male", "Gender_Female", "Age", "Tenure", "Balance", "NumOfProducts", "HasCrCard", "IsActiveMember", "EstimatedSalary"]
