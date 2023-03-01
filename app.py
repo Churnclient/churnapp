@@ -3,10 +3,21 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
+import requests
 
-# Load the model
-with open('./model.plk', 'rb') as file:
-    model = load(file)
+
+# Define the URL of the raw model file on GitHub
+model_url = 'https://github.com/Churnclient/churnapp/blob/main/model.pkl'
+
+# Define a function to download the model file from GitHub
+@st.cache(allow_output_mutation=True)
+def download_model(url):
+    response = requests.get(url)
+    with open('model.plk', 'wb') as file:
+        file.write(response.content)
+
+# Download the model file from GitHub
+download_model(model_url)
 
 
 # Define the features
