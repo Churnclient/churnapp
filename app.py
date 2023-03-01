@@ -40,38 +40,24 @@ is_active_member = st.radio("Is Active Member", options=["Yes", "No"])
 estimated_salary = st.number_input("Estimated Salary", value=100000)
 
 # Prepare the input data for prediction
-input_data = np.array([[credit_score]])
-
-# Encode the categorical variables
-if geography == "France":
-    input_data = np.append(input_data, [1, 0, 0])
-elif geography == "Spain":
-    input_data = np.append(input_data, [0, 0, 1])
-else:
-    input_data = np.append(input_data, [0, 1, 0])
-
-if gender == "Male":
-    input_data = np.append(input_data, [1, 0])
-else:
-    input_data = np.append(input_data, [0, 1])
-
-input_data = np.append(input_data, [age, tenure, balance, num_of_products])
-
-if has_cr_card == "Yes":
-    input_data = np.append(input_data, [1])
-else:
-    input_data = np.append(input_data, [0])
-
-if is_active_member == "Yes":
-    input_data = np.append(input_data, [1])
-else:
-    input_data = np.append(input_data, [0])
-
-input_data = np.append(input_data, [estimated_salary])
-
+input_data = pd.DataFrame({
+    "CreditScore": [credit_score],
+    "Geography_France": [1 if geography == "France" else 0],
+    "Geography_Spain": [1 if geography == "Spain" else 0],
+    "Geography_Germany": [1 if geography == "Germany" else 0],
+    "Gender_Male": [1 if gender == "Male" else 0],
+    "Gender_Female": [1 if gender == "Female" else 0],
+    "Age": [age],
+    "Tenure": [tenure],
+    "Balance": [balance],
+    "NumOfProducts": [num_of_products],
+    "HasCrCard": [1 if has_cr_card == "Yes" else 0],
+    "IsActiveMember": [1 if is_active_member == "Yes" else 0],
+    "EstimatedSalary": [estimated_salary]
+})
 
 # Scale the input data
-input_data = scaler.fit_transform(input_data.reshape(1, -1))
+input_data = scaler.fit_transform(input_data[features])
 
 # Make a prediction
 prediction = model11.predict(input_data)
@@ -79,12 +65,9 @@ prediction = model11.predict(input_data)
 # Display the prediction
 st.write("## Prediction")
 if prediction == 0:
-    #st.write("The client is predicted to stay.")
     st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
     st.balloons()
 else:
-    #st.write("The client is predicted to churn.")
     st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
     st.snow()
 st.stop()
-
