@@ -1,29 +1,21 @@
-from joblib import load
+# Import the necessary libraries
+from tensorflow.keras.models import load_model
 import numpy as np
 import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
 import requests
 
-
 # Define the URL of the raw model file on GitHub
 model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.h5'
 
 # Define a function to download the model file from GitHub
-#@st.cache(allow_output_mutation=True)
-#def download_model(url):
-    #response = requests.get(url)
-    #with open('model2.pkl', 'wb') as file:
-        #file.write(response.content)
-    #return load('model2.pkl')
 @st.cache(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
     with open('model2.h5', 'wb') as file:
         file.write(response.content)
-    model = load('model2.h5')
-    print(model)  # add this line to print the loaded model object
-    return model
+    return load_model('model2.h5')
 
 # Download the model file from GitHub
 model2 = download_model(model_url)
@@ -71,12 +63,9 @@ input_data = scaler.fit_transform(input_data[features])
 prediction = model2.predict(input_data)
 
 # Display the prediction
-print(f'the prediction is {prediction}')
 st.write("## Prediction")
 if prediction[0][0] < 0.5:
     st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
     st.balloons()
 else:
     st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
-    st.snow()
-st.stop()
