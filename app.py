@@ -10,7 +10,7 @@ import requests
 model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.pkl'
 
 # Define a function to download the model file from GitHub
-@st.cache(allow_output_mutation=True)
+@st.cache_data(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
     with open('model2.pkl', 'wb') as file:
