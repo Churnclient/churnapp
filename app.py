@@ -7,15 +7,15 @@ import requests
 
 
 # Define the URL of the raw model file on GitHub
-model_url = 'https://github.com/Churnclient/churnapp/raw/main/model11.pkl'
+model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.pkl'
 
 # Define a function to download the model file from GitHub
 @st.cache(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
-    with open('model11.pkl', 'wb') as file:
+    with open('model2.pkl', 'wb') as file:
         file.write(response.content)
-    return load('model11.pkl')
+    return load('model2.pkl')
 
 # Download the model file from GitHub
 model11 = download_model(model_url)
@@ -60,7 +60,7 @@ input_data = pd.DataFrame({
 input_data = scaler.fit_transform(input_data[features])
 
 # Make a prediction
-prediction = model11.predict(input_data)
+prediction = model2.predict(input_data)
 
 # Display the prediction
 st.write("## Prediction")
