@@ -63,7 +63,7 @@ input_data = scaler.fit_transform(input_data[features])
 prediction = model2.predict(input_data)
 
 # Display the prediction
-
+print(f'the prediction is {prediction}')
 st.write("## Prediction")
 if prediction[0][0] < 0.5:
     st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
