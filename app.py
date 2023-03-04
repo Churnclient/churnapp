@@ -19,7 +19,7 @@ model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.h5'
 @st.cache(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
-    with open('model2.pkl', 'wb') as file:
+    with open('model2.h5', 'wb') as file:
         file.write(response.content)
     model = load('model2.h5')
     print(model)  # add this line to print the loaded model object
