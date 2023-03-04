@@ -7,7 +7,7 @@ import requests
 
 
 # Define the URL of the raw model file on GitHub
-model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.pkl'
+model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.h5'
 
 # Define a function to download the model file from GitHub
 #@st.cache(allow_output_mutation=True)
@@ -21,7 +21,7 @@ def download_model(url):
     response = requests.get(url)
     with open('model2.pkl', 'wb') as file:
         file.write(response.content)
-    model = load('model2.pkl')
+    model = load('model2.h5')
     print(model)  # add this line to print the loaded model object
     return model
 
