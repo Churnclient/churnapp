@@ -8,13 +8,13 @@ import requests
 import joblib
 
 # Define the URL of the raw model file on GitHub
-model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.h5'
+model_url = 'https://github.com/Churnclient/churnapp/raw/main/model22.h5'
 scaler_url = 'https://github.com/Churnclient/churnapp/raw/main/scaler.pkl'
 
 # Define a function to download the model file from GitHub
 def download_model(url):
     response = requests.get(url)
-    with open('model2.h5', 'wb') as file:
+    with open('model22.h5', 'wb') as file:
         file.write(response.content)
 
 # Define a function to download the scaler file from GitHub
@@ -28,7 +28,7 @@ download_model(model_url)
 download_scaler(scaler_url)
 
 # Load the model and scaler
-model2 = load_model('model2.h5')
+model2 = load_model('model22.h5')
 scaler = joblib.load('scaler.pkl')
 
 # Define the features
