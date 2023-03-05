@@ -78,3 +78,4 @@ if prediction[0][0] < 0.5:
     st.balloons()
 else:
     st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
+    st.snow()
