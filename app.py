@@ -1,4 +1,3 @@
-# Import the necessary libraries
 from tensorflow.keras.models import load_model
 import numpy as np
 import pandas as pd
@@ -47,35 +46,36 @@ has_cr_card = st.radio("Has Credit Card", options=["Yes", "No"])
 is_active_member = st.radio("Is Active Member", options=["Yes", "No"])
 estimated_salary = st.number_input("Estimated Salary", value=100000)
 
-# Prepare the input data for prediction
-input_data = pd.DataFrame({
-    "CreditScore": [credit_score],
-    "Geography_France": [1 if geography == "France" else 0],
-    "Geography_Spain": [1 if geography == "Spain" else 0],
-    "Geography_Germany": [1 if geography == "Germany" else 0],
-    "Gender_Male": [1 if gender == "Male" else 0],
-    "Gender_Female": [1 if gender == "Female" else 0],
-    "Age": [age],
-    "Tenure": [tenure],
-    "Balance": [balance],
-    "NumOfProducts": [num_of_products],
-    "HasCrCard": [1 if has_cr_card == "Yes" else 0],
-    "IsActiveMember": [1 if is_active_member == "Yes" else 0],
-    "EstimatedSalary": [estimated_salary]
-})
 
-# Scale the input data
-input_data = scaler.transform(input_data)
+if st.button("OK"):
+    # Prepare the input data for prediction
+    input_data = pd.DataFrame({
+        "CreditScore": [credit_score],
+        "Geography_France": [1 if geography == "France" else 0],
+        "Geography_Spain": [1 if geography == "Spain" else 0],
+        "Geography_Germany": [1 if geography == "Germany" else 0],
+        "Gender_Male": [1 if gender == "Male" else 0],
+        "Gender_Female": [1 if gender == "Female" else 0],
+        "Age": [age],
+        "Tenure": [tenure],
+        "Balance": [balance],
+        "NumOfProducts": [num_of_products],
+        "HasCrCard": [1 if has_cr_card == "Yes" else 0],
+        "IsActiveMember": [1 if is_active_member == "Yes" else 0],
+        "EstimatedSalary": [estimated_salary]
+    })
 
-# Make a prediction
-prediction = model2.predict(input_data)
+    # Scale the input data
+    input_data = scaler.transform(input_data)
 
-# Display the prediction
-print(f'the prediction is {prediction}')
-st.write("## Prediction")
-if prediction[0][0] < 0.5:
-    st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
-    st.balloons()
-else:
-    st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
-    st.snow()
+    # Make a prediction
+    prediction = model2.predict(input_data)
+
+    # Display the prediction
+    st.write("## Prediction")
+    if prediction[0][0] < 0.5:
+        st.write("<h1 style='color: green;'>The client is predicted to stay</h1>", unsafe_allow_html=True)
+        st.balloons()
+    else:
+        st.write("<h1 style='color: red;'>The client is predicted to churn</h1>", unsafe_allow_html=True)
+        st.snow()
