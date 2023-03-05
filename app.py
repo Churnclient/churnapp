@@ -5,26 +5,34 @@ import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
 import requests
+import joblib
 
 # Define the URL of the raw model file on GitHub
 model_url = 'https://github.com/Churnclient/churnapp/raw/main/model2.h5'
+scaler_url = 'https://github.com/Churnclient/churnapp/raw/main/scaler.pkl'
 
 # Define a function to download the model file from GitHub
-#@st.cache(allow_output_mutation=True)
 def download_model(url):
     response = requests.get(url)
     with open('model2.h5', 'wb') as file:
         file.write(response.content)
-    return load_model('model2.h5')
 
-# Download the model file from GitHub
-model2 = download_model(model_url)
+# Define a function to download the scaler file from GitHub
+def download_scaler(url):
+    response = requests.get(url)
+    with open('scaler.pkl', 'wb') as file:
+        file.write(response.content)
+
+# Download the model and scaler files from GitHub
+download_model(model_url)
+download_scaler(scaler_url)
+
+# Load the model and scaler
+model2 = load_model('model2.h5')
+scaler = joblib.load('scaler.pkl')
 
 # Define the features
 features = ["CreditScore", "Geography_France", "Geography_Spain", "Geography_Germany", "Gender_Male", "Gender_Female", "Age", "Tenure", "Balance", "NumOfProducts", "HasCrCard", "IsActiveMember", "EstimatedSalary"]
-
-# Define the StandardScaler
-scaler = StandardScaler()
 
 # Define the input fields
 st.write("# Client Churn Prediction")
@@ -57,8 +65,7 @@ input_data = pd.DataFrame({
 })
 
 # Scale the input data
-scaler.fit(input_data[features])
-input_data = scaler.transform(input_data[features])
+input_data = scaler.transform(input_data)
 
 # Make a prediction
 prediction = model2.predict(input_data)
