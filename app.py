@@ -57,7 +57,7 @@ input_data = pd.DataFrame({
 })
 
 # Scale the input data
-input_data = scaler.fit_transform(input_data[features])
+input_data = scaler.transform(input_data[features])
 
 # Make a prediction
 prediction = model2.predict(input_data)
